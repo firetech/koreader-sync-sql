@@ -15,12 +15,12 @@ COPY requirements.txt .
 
 ENV PYTHONDONTWRITEBYTECODE 1
 
-RUN python3 -m pip install --user --no-cache-dir --upgrade \
+RUN python3 -m pip install --target=/opt/kosync --no-cache-dir --upgrade \
     pip \
     setuptools \
     wheel
 
-RUN python3 -m pip install --user --no-cache-dir \
+RUN python3 -m pip install --target=/opt/kosync --no-cache-dir \
     -r requirements.txt
 
 FROM python:3.11-slim
@@ -31,10 +31,11 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 ENV PYTHONUNBUFFERED 1
+ENV PYTHONPATH=/opt/kosync:${PYTHONPATH}
 
 WORKDIR /app
 
-COPY --from=builder /root/.local /root/.local
+COPY --from=builder /opt/kosync /opt/kosync
 
 COPY kosync.py .
 
@@ -46,4 +47,4 @@ ENV PATH=/root/.local/bin:$PATH
 
 HEALTHCHECK --interval=30s --timeout=10s CMD curl --fail http://localhost:8081/healthstatus || exit 1
 
-CMD ["uvicorn", "kosync:app", "--host", "0.0.0.0", "--port", "8081"]
+CMD ["python3", "-m", "uvicorn", "kosync:app", "--host", "0.0.0.0", "--port", "8081"]
