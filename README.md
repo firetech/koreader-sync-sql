@@ -41,7 +41,14 @@ To use this tool, you may need to run `pip install tinydb` first, it's not inclu
 To build locally:
 
 ```bash
-docker build --rm=true --tag=kosync:latest .
+docker build --rm=true --tag=ghcr.io/firetech/koreader-sync-sql:latest .
+docker compose up -d
+```
+
+To pull the published image from GitHub Container Registry:
+
+```bash
+docker pull ghcr.io/firetech/koreader-sync-sql:latest
 docker compose up -d
 ```
 
@@ -65,6 +72,14 @@ usually delete the *.sdr files with some cleaning tools.
 
 Enable/disable new registrations to the server. Useful if you want to run a private server for a few users, although it doesn't necessarily improve security by itself.
 Set to True (enabled) by default.
+
+## GitHub Container Registry
+
+The project publishes container images to GitHub Container Registry (GHCR).
+
+```bash
+docker pull ghcr.io/firetech/koreader-sync-sql:latest
+```
 
 ## Connection
 

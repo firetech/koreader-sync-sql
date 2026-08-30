@@ -1,12 +1,13 @@
 services:
   kosync:
-    image: kosync:latest
+    image: ghcr.io/firetech/koreader-sync-sql:latest
     container_name: kosync
     ports:
       - 8081:8081
     volumes:
-      - ./data:/app/data
+      - ./data:/data
     environment:
+      - DATABASE_URL=sqlite:////data/kosync.db
       - RECEIVE_RANDOM_DEVICE_ID=False
       - OPEN_REGISTRATIONS=True
     restart: unless-stopped
