@@ -25,13 +25,13 @@ uvicorn kosync:app --host 0.0.0.0 --port 8081
 This version stores its data in SQLite using SQLAlchemy. If you already have a TinyDB database from an older deployment, migrate it with the dedicated script:
 
 ```bash
-python migrate_from_tinydb.py [path/to/db.json] [sqlite:///path/to/sqlite.db]
+python migrate_from_tinydb.py [--tinydb path/to/db.json] [--sql sqlite:///path/to/sqlite.db]
 ```
 
 To preview the migration without writing any new data:
 
 ```bash
-python migrate_from_tinydb.py --dry-run [path/to/db.json] [sqlite:///path/to/sqlite.db]
+python migrate_from_tinydb.py --dry-run [--tinydb path/to/db.json] [--sql sqlite:///path/to/sqlite.db]
 ```
 
 To use this tool, you may need to run `pip install tinydb` first, it's not included in requirements.txt.

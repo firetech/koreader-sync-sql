@@ -78,26 +78,28 @@ if __name__ == "__main__":
         description="Migrate a TinyDB KOReader sync database to SQLite.",
     )
     parser.add_argument(
-        "source_path",
+        "--tinydb",
+        "-t",
         help="Path to the TinyDB JSON file",
         default="data/db.json",
-        nargs="?",
     )
     parser.add_argument(
-        "dest_url",
+        "--sql",
+        "-s",
         help="Destination database URL (e.g., sqlite:///path/to/sqlite.db)",
         default=DATABASE_URL,
         nargs="?",
     )
     parser.add_argument(
         "--dry-run",
+        "-n",
         action="store_true",
         help="Show what would be migrated without writing data",
     )
     args = parser.parse_args()
 
     try:
-        migrate(args.source_path, args.dest_url, dry_run=args.dry_run)
+        migrate(args.tinydb, args.sql, dry_run=args.dry_run)
     except Exception as exc:  # pragma: no cover - CLI bootstrap only
         print(f"Error: {exc}", file=sys.stderr)
         raise SystemExit(1)
