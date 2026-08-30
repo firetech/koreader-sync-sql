@@ -160,4 +160,4 @@ cython_debug/
 #.idea/
 
 # koreader-sync
-data/db.json
+/data/kosync.db
