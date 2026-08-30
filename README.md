@@ -2,7 +2,9 @@
 
 ## Description
 
-This is a simple implementation of the KOReader (https://github.com/koreader/koreader) position sync server for self-hosting at home which has docker support for arm and amd64 :) _This is a fork of https://github.com/b1n4ryj4n/koreader-sync rewritten to use an SQL backend instead of TinyDB._
+This is a simple implementation of the KOReader (https://github.com/koreader/koreader) position sync server for self-hosting at home which has Docker support for arm/v7, arm64, and amd64.
+
+_This is a fork of https://github.com/b1n4ryj4n/koreader-sync rewritten to use an SQL backend instead of TinyDB._
 
 ## Dependencies
 
@@ -64,8 +66,8 @@ DATABASE_URL=sqlite:///data/kosync.db
 
 * RECEIVE_RANDOM_DEVICE_ID ("True"|"False")
 
-Set it true to retrieve always a random device id to force a progress sync. 
-This is usefull if you only sync your progress from one device and 
+Set it true to retrieve always a random device id to force a progress sync.
+This is usefull if you only sync your progress from one device and
 usually delete the *.sdr files with some cleaning tools.
 
 * OPEN_REGISTRATIONS ("True"|"False")
