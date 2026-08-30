@@ -96,3 +96,21 @@ def test_api(db_path: Path, client: TestClient):
         assert doc_row[3] == 25.5
         assert doc_row[4] == "kindle"
         assert doc_row[5] == "device-123"
+
+    response = client.get(
+        "/syncs/progress/book-1",
+        headers={"x-auth-user": "alice", "x-auth-key": "secret"},
+    )
+    assert response.status_code == 200
+    response_json = response.json()
+    assert response_json["document"] == "book-1"
+    assert response_json["progress"] == "1234"
+    assert response_json["percentage"] == 25.5
+    assert response_json["device"] == "kindle"
+    assert response_json["device_id"] == "device-123"
+
+    response = client.get(
+        "/healthstatus",
+    )
+    assert response.status_code == 200
+    assert response.json()["message"] == "healthy"
