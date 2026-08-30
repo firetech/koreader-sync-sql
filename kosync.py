@@ -4,7 +4,6 @@ import hashlib
 import os
 import time
 import uuid
-from distutils.util import strtobool
 from contextlib import asynccontextmanager
 from os import getenv
 from pathlib import Path
@@ -109,6 +108,15 @@ def verify_password(stored_hash: str, supplied_password: str) -> bool:
     expected = hashlib.pbkdf2_hmac("sha256", supplied_password.encode("utf-8"), salt, 200_000).hex()
     return expected == digest_hex
 
+
+def strtobool(value: str) -> bool:
+    value = value.lower()
+    if value in ("y", "yes", "t", "true", "on", "1"):
+        return True
+    elif value in ("n", "no", "f", "false", "off", "0"):
+        return False
+    else:
+        raise ValueError(f"Invalid truth value: {value}")
 
 @app.post("/users/create")
 def register(kosync_user: KosyncUser, db: Session = Depends(get_db)):
