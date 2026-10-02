@@ -2,7 +2,7 @@
 """Convert a TinyDB KOReader sync database into a SQLite/SQLAlchemy database.
 
 Usage:
-    python migrate_tinydb_to_sqlite.py [--dry-run] /path/to/data/db.json [target_sql_url]
+    python migrate_tinydb_to_sqlite.py [--dry-run] [--tinydb path/to/db.json] [--sql sqlite:///path/to/sqlite.db]
 """
 
 import argparse
@@ -88,7 +88,6 @@ if __name__ == "__main__":
         "-s",
         help="Destination database URL (e.g., sqlite:///path/to/sqlite.db)",
         default=DATABASE_URL,
-        nargs="?",
     )
     parser.add_argument(
         "--dry-run",
